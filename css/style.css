@@ -1,0 +1,77 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    font-size: 1rem;
+    color: #222222;
+    background-color: #2D4A3E;
+    line-height: 1.5;
+}
+
+header {
+    background-color: #4A5844;
+    padding: 1rem;
+
+    h1 {
+        font-size: 3rem;
+        color: #A66E4E;
+    }
+
+    nav a {
+        margin-right: 1rem;
+    }
+}
+
+main {
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+section {
+    margin: 1rem 0;
+}
+
+#map img {
+    border: 2px solid #000;
+    padding: 0.2rem;
+}
+
+.route-card {
+    padding: 4px 10px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    background-color: #63402c;
+}
+
+.easy-level {
+    display: inline-block;
+    color: limegreen;
+}
+
+.medium-level {
+    display: inline-block;
+    color: orange;
+}
+
+.hard-level {
+    display: inline-block;
+    color: red;
+}
+
+aside{
+    background-color: #2A7B62;
+    color: white;
+    border-radius: 10px;
+    border: 1px double white;
+    padding: 1rem;
+}
+
+footer{
+    font-size: small;
+    padding: 0.5rem;
+    color: #9368B7;
+}
