@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header>
+<header class="site-header">
     <h1>Карта веломаршрутів</h1>
-    <nav>
+    <nav class = site-header>
         <a href="#map">Карта</a>
         <a href="#routes">Маршрути</a>
     </nav>
 </header>
 
-<main>
+<main class = layout>
     <section id="map">
         <h2>Карта</h2>
         <img src="assets/img/map_placeholder.jpg" alt="Карта міста з веломаршрутами">
@@ -23,33 +23,36 @@
 
     <section id="routes">
         <h2>Маршрути</h2>
-        <article class = "route-card">
-            <h3>Маршрут №1</h3>
-            <p>
-                Назва: Бориспіль - Багрянова гора<br>
-                Довжина: 33,48км<br>
-                Складніть: <span class="easy-level">легко</span>
-            </p>
-            <a href="#route-info">Деталі маршруту</a>
-        </article>
-        <article class = "route-card">
-            <h3>Маршрут №2</h3>
-            <p>
-                Назва: Вабля - Київ<br>
-                Довжина: 87,8км<br>
-                Складніть: <span class="medium-level">посередньо</span>
-            </p>
-            <a href="#route-info">Деталі маршруту</a>
-        </article>
-        <article class = "route-card">
-            <h3>Маршрут №3</h3>
-            <p>
-                Назва: Озеро Бучак<br>
-                Довжина: 125,64км<br>
-                Складніть: <span class="hard-level">складно</span>
-            </p>
-            <a href="#route-info">Деталі маршруту</a>
-        </article>
+        <div class = cards>
+            <article class = "route-card">
+                <h3>Маршрут №1</h3>
+                <p>
+                    Назва: Бориспіль - Багрянова гора<br>
+                    Довжина: 33,48км<br>
+                    Складніть: <span class="easy-level">легко</span>
+                </p>
+                <a href="#route-info">Деталі маршруту</a>
+            </article>
+            <article class = "route-card">
+                <h3>Маршрут №2</h3>
+                <p>
+                    Назва: Вабля - Київ<br>
+                    Довжина: 87,8км<br>
+                    Складніть: <span class="medium-level">посередньо</span>
+                </p>
+                <a href="#route-info">Деталі маршруту</a>
+            </article>
+            <article class = "route-card">
+                <h3>Маршрут №3</h3>
+                <p>
+                    Назва: Озеро Бучак<br>
+                    Довжина: 125,64км<br>
+                    Складніть: <span class="hard-level">складно</span>
+                </p>
+                <a href="#route-info">Деталі маршруту</a>
+            </article>
+        </div>
+
     </section>
 </main>
 <aside id="route-info">

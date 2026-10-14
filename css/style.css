@@ -24,7 +24,47 @@ header {
         margin-right: 1rem;
     }
 }
+.site-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #4A5844;
+}
+.site-header nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.cards {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+@media(min-width: 600px){
+    .cards{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+}
 
+@media(min-width: 1280px){
+    .cards{
+        gap: 40px;
+        grid-template-columns: repeat(1, 300px);
+    }
+
+    .layout{
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap:40px;
+    }
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
 main {
     max-width: 50rem;
     margin: 0 auto;
