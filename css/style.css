@@ -38,9 +38,10 @@ header {
 }
 .cards {
     display: grid;
+    color: #ffee14;
     grid-template-columns: 1fr;
 }
-@media(min-width: 600px){
+@media(min-width: 600px) and (max-width: 1280px) {
     .cards{
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -48,25 +49,24 @@ header {
     }
 }
 
-@media(min-width: 1280px){
+@media(width > 1280px){
     .cards{
-        gap: 40px;
-        grid-template-columns: repeat(1, 300px);
+        grid-template-columns: repeat(1, 1fr);
     }
 
     .layout{
         display: grid;
         grid-template-columns: 2fr 1fr;
-        gap:40px;
+        gap:24px;
     }
 }
 
 img{
-    max-width: 100%;
-    height: auto;
+    object-fit: fill;
+    height: 50%;
+    width: 100%;
 }
 main {
-    max-width: 50rem;
     margin: 0 auto;
     padding: 2rem;
 }
@@ -88,18 +88,27 @@ section {
 }
 
 .easy-level {
+    color: white;
+    border-radius: 5px;
+    background-color: limegreen;
     display: inline-block;
-    color: limegreen;
+    padding: 4px;
 }
 
 .medium-level {
+    color: white;
+    border-radius: 5px;
+    background-color: orange;
     display: inline-block;
-    color: orange;
+    padding: 4px;
 }
 
 .hard-level {
+    color: white;
+    border-radius: 5px;
+    background-color: red;
     display: inline-block;
-    color: red;
+    padding: 4px;
 }
 
 aside{
@@ -113,5 +122,15 @@ aside{
 footer{
     font-size: small;
     padding: 0.5rem;
-    color: #9368B7;
+    color: #c936e3;
+}
+.map_sec{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.routes_sec{
+    h2{
+        text-align: center;
+    }
 }
