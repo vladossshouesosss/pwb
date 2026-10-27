@@ -49,6 +49,12 @@ header {
     }
 }
 
+.map_sec img{
+    object-fit: cover;
+    max-width: 100%;
+    height: auto;
+}
+
 @media(width > 1280px){
     .cards{
         max-height: calc(3 * 210px + 2 * 16px);
@@ -63,13 +69,14 @@ header {
         gap:24px;
         align-items: stretch;
     }
+    .map_sec img{
+        object-fit: cover;
+        width: 100%;
+        height: calc(3 * 210px + 2 * 16px);
+    }
 }
 
-.map_sec img{
-    object-fit: cover;
-    width: 100%;
-    height: calc(3 * 210px + 2 * 16px);;
-}
+
 main {
     margin: 0 auto;
     padding: 2rem;
