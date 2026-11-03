@@ -92,32 +92,81 @@ function calcTotalRoutesLength(){
     }
     return total;
 }
+const form = document.querySelector('#route-add-form');
+/*
+submit event handler, prevents from reloading page
+takes data from form, creates new route based on it
+and re-renders the cards
+ */
+form.addEventListener('submit', (event) => {
+    event.preventDefault()
+    const formData = new FormData(form);
+    const routeName = formData.get('name');
+    const routeLength = Number(formData.get('lengthKm'));
+    routes.push(new route(routeName, routeLength));
+    renderCards(routes);
+    form.reset();
+})
+/*
+adds message on user screen if input is incorrect
+based on HTML constants
+ */
+form.addEventListener('input', (event) => {
+    const inputLength = document.querySelector('#lengthKm');
+    const inputName = document.querySelector('#name');
+    const lengthVal = Number(inputLength.value);
+    const minVal = Number(inputLength.min);
+    const maxVal = Number(inputLength.max);
+    const minNameLength = inputName.minLength;
+    if (inputLength.value !== '' && (lengthVal > maxVal || lengthVal < minVal)) {
+        inputLength.setCustomValidity(`Будь ласка, введіть маршрут з довжиною у межах ${minVal} - ${maxVal} км`);
+    } else {
+        inputLength.setCustomValidity('');
+    }
+    if (inputName.value.trim().length < minNameLength) {
+        inputName.setCustomValidity(`Будь ласка, введіть маршрут з назвою не меншою за ${minNameLength} символи`);
+    } else {
+        inputName.setCustomValidity('');
+    }
+})
+const filterSelect = document.querySelector('#diff-select');
+/*
+based on selector changes re-renders screen
+with only routes of certain difficulty
+ */
+filterSelect.addEventListener('change', () => {
+    const selectedFilter = filterSelect.value;
+    renderCards(routes, selectedFilter);
+});
 /*
 renders all cards
 creates tags, fills them with helping functions, adds them
  */
-function renderCards(routes){
+function renderCards(routes, filter=null){
     listContainer.innerHTML = '';
     listContainer.append(createTagWithText('h2', 'Маршрути'))
     const divForRoutes = document.createElement('div')
     divForRoutes.classList.add('cards');
     listContainer.append(divForRoutes)
     for (const route of routes) {
-        const card = document.createElement('article');
-        card.append(createTagWithText('h3', route.routeName));
-        card.append(createTagWithText('p', 'Довжина: ' + route.routeLength + 'км'))
-        card.dataset.km = route.routeLength;
-        card.classList.add(route.classifyDiffLevel());
-        card.classList.add('route-card')
-        card.append(createReference('Деталі маршруту' + lineBreaker, '#route-info'));
-        divForRoutes.append(card);
+        if (filter === null || filter === 'null' || route.classifyDiffLevel() === filter) {
+            const card = document.createElement('article');
+            card.append(createTagWithText('h3', route.routeName));
+            card.append(createTagWithText('p', 'Довжина: ' + route.routeLength + 'км'))
+            card.dataset.km = route.routeLength;
+            card.classList.add(route.classifyDiffLevel());
+            card.classList.add('route-card')
+            card.append(createReference('Деталі маршруту' + lineBreaker, '#route-info'));
+            divForRoutes.append(card);
+        }
     }
     listContainer.append(
         Object.assign(
             createTagWithText('p', 'Загальна довжина: ' + calcTotalRoutesLength(routes), 'total-km'),
-            { className: 'total-card'}
+            { className: 'omni-card'}
         )
     );
+    listContainer.append(form)
 }
 
 renderCards(routes)
@@ -131,3 +180,5 @@ for (const route of routes) {
     console.log(route.routeName + ' - ' + estimateMinutes(route.routeLength) + 'хв');
 }
 console.log(calcTotalRoutesLength())
+
+

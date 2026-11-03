@@ -53,6 +53,24 @@
                 <a href="#route-info">Деталі маршруту</a>
             </article>
         </div>
+        <form class = "omni-card" id = "route-add-form">
+            <p>
+                <label for="name">Введіть ім'я</label>
+                <input type ="text" id ="name" name = "name" required minlength="3" maxlength="75">
+            </p>
+            <p>
+                <label for = "lengthKm">Довжина маршруту:</label>
+                <input type="number" id="lengthKm" name="lengthKm" required min="0.1" max = "300" step="any">
+            </p>
+            <label for="diff-select">Виберіть рівень складності</label>
+            <select id="diff-select" name="difficulty">
+                <option value = "null">Усі</option>
+                <option value = "easy-level">Легкий</option>
+                <option value = "medium-level">Середній</option>
+                <option value = "hard-level">Високий</option>
+            </select>
+            <button type="submit">Додати маршрут</button>
+        </form>
 
     </section>
 </main>
