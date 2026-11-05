@@ -1,3 +1,4 @@
+const URL = 'https://jsonplaceholder.typicode.com/users'
 const lineBreaker = '\r\n'
 const cards = document.querySelectorAll('.route-card');
 for(const card of cards) {
@@ -162,7 +163,7 @@ function renderCards(routes, filter=null){
     }
     listContainer.append(
         Object.assign(
-            createTagWithText('p', 'Загальна довжина: ' + calcTotalRoutesLength(routes), 'total-km'),
+            createTagWithText('p', 'Загальна довжина: ' + calcTotalRoutesLength(routes).toFixed(2), 'total-km'),
             { className: 'omni-card'}
         )
     );
@@ -180,5 +181,70 @@ for (const route of routes) {
     console.log(route.routeName + ' - ' + estimateMinutes(route.routeLength) + 'хв');
 }
 console.log(calcTotalRoutesLength())
+/*
+returns random number from range
+including its end
+ */
+function getRandomFromRange(min, max){
+    return Math.random() * (max - min + Number.EPSILON) + min;
+}
+/*
+gets data from api, turns it into array of jsons
+then adds to array of routes each route
+with name of authors and city where route is located
+uses random function for length since there are no data
+about it in api
+ */
+async function loadData(){
+    try {
+        comRoutesButton.disabled = true;
+        const response = await fetch(URL)
+        if(!response.ok){
+            throw new Error(`Код ${response.statusText}`);
+        }
+        const data = await response.json()
+        const inputData = document.getElementById('lengthKm');
+        for(const record of data){
+            const distance = parseFloat(getRandomFromRange(parseFloat(inputData.min), parseFloat(inputData.max)).toFixed(2))
+            routes.push(new route(`Маршрут по ${record.address.city} від ${record.name}`, distance))
+        }
+        renderCards(routes);
+    }catch(error){
+        if(!document.getElementById('error-msg')){
+            form.append(createTagWithText('p', 'Не вдалося отримати дані про маршрути.Спробуйте, будь ласка, пізніше', 'error-msg'))
+        }
+        console.error(error)
+        document.getElementById('form-buttons').append(updButton)
+        document.getElementById('com-routes-button').remove();
+    }
+    finally {
+        comRoutesButton.disabled = false;
 
-
+    }
+}
+const inputData = document.getElementById('lengthKm');
+console.log(getRandomFromRange(parseFloat(inputData.min), parseFloat(inputData.max)).toFixed(2))
+const comRoutesButton = document.getElementById('com-routes-button');
+/*
+this button calls function that gets data from api and redraws page after
+ */
+comRoutesButton.addEventListener('click', (event) => {
+    event.preventDefault()
+    loadData();
+})
+const updButton = document.getElementById('com-routes-update');
+const routesButton = document.getElementById('com-routes-button');
+updButton.remove()
+/*
+this button appears only if error is thrown
+removes community routes button
+if data is successfully loaded, removes itself
+and adds community routes button back
+ */
+updButton.addEventListener('click', (event) => {
+    event.preventDefault()
+    loadData();
+    document.getElementById('com-routes-update')?.remove();
+    document.getElementById('error-msg').remove();
+    document.getElementById('form-buttons').append(routesButton)
+})
