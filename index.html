@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Карта веломаршрутів</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/app.js" defer></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+    <script type="text/babel" src="js/app.js"></script>
 </head>
 <body>
 <header class="site-header">
@@ -24,7 +29,7 @@
 
     <section class = "routes_sec" id="routes">
         <h2>Маршрути</h2>
-        <div class = cards>
+        <div id="routes-root" class = cards>
             <article class = "route-card">
                 <h3>Маршрут №1</h3>
                 <p>

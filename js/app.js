@@ -5,11 +5,15 @@ for(const card of cards) {
     card.remove()
 }
 console.log('script.js підключено')
+const avgSpeed = 15
 class route{
+    static #nextId = 1
+    #id
     #routeName
     #routeLength
     #diffLevel
     constructor(routeName, routeLength){
+        this.#id = route.#nextId++
         if(routeName !== ""){
             this.#routeName = routeName;
         }else{
@@ -23,6 +27,10 @@ class route{
             this.#diffLevel = 'Невідома';
         }
 
+    }
+    // returns unique id of the route
+    get id(){
+        return this.#id;
     }
     // returns name of the route
     get routeName(){
@@ -56,6 +64,11 @@ class route{
         return totalLength;
     }
 }
+const diffLabels = {
+    'easy-level': 'легка',
+    'medium-level': 'середня',
+    'hard-level': 'складна',
+};
 const routes = []
 routes.push(new route('Бориспіль - Багрянова гора', 33.48))
 routes.push(new route('Вабля - Київ', 87.8))
@@ -169,8 +182,10 @@ function renderCards(routes, filter=null){
     );
     listContainer.append(form)
 }
-
-renderCards(routes)
+/*
+    removed due to react render
+ */
+//renderCards(routes)
 console.log(route.calcTotalRoutesLength(routes).toFixed(2))
 for (const route of routes) {
     console.log(route.routeName + ' - ' + route.classifyDiffLevel())
@@ -189,7 +204,7 @@ function getRandomFromRange(min, max){
     return Math.random() * (max - min + Number.EPSILON) + min;
 }
 /*
-gets data from api, turns it into array of jsons
+gets data from api, turns it into array of JSONs
 then adds to array of routes each route
 with name of authors and city where route is located
 uses random function for length since there are no data
@@ -248,3 +263,39 @@ updButton.addEventListener('click', (event) => {
     document.getElementById('error-msg').remove();
     document.getElementById('form-buttons').append(routesButton)
 })
+const {useState} = React;
+
+function RouteCards({routeName, routeDiff, routeLength, routeNumber}){
+    return(
+      <article className="route-card">
+        <h3>Маршрут №{routeNumber}</h3>
+          <p>Назва: {routeName}
+              <br/>
+              Довжина: {routeLength}км
+              <br/>
+              Прогнозований час: {Math.round(routeLength / avgSpeed * 60)} хв.
+              <br/>
+              Складність: <span className={routeDiff}>{diffLabels[routeDiff] ?? 'Невідома'}</span>
+          </p>
+          <a href="#route-info">Деталі маршруту</a>
+      </article>
+    );
+}
+function App() {
+    const [items, setItems] = React.useState(routes);
+    return (
+        <div className="cards">
+            {items.map((r) => (
+                <RouteCards
+                    key={r.id}
+                    routeNumber={r.id}
+                    routeName={r.routeName}
+                    routeLength={r.routeLength}
+                    routeDiff={r.diffLevel}
+                />
+            ))}
+        </div>
+    );
+
+}
+ReactDOM.createRoot(document.getElementById('routes-root')).render(<App />);

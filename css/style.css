@@ -119,8 +119,7 @@ section {
 від заокругленого шрифту легкого маршруту до
 гострого і різкого шрифту маршруту великого рівня складності.
  */
-.easy-level::after{
-    content: 'легко';
+.easy-level{
     font-weight: bold;
     font-family: sans-serif;
     border-radius: 5px;
@@ -129,8 +128,7 @@ section {
     padding: 4px;
 }
 
-.medium-level::after{
-    content: 'посередньо';
+.medium-level{
     font-family: Georgia, sans-serif;
     border-radius: 5px;
     background-color: #ffa500;
@@ -138,8 +136,8 @@ section {
     padding: 4px;
 }
 
-.hard-level::after{
-    content: 'складно';
+.hard-level{
+
     font-family: "Franklin Gothic Heavy", sans-serif;
     border-radius: 5px;
     background-color: #ff0000;
