@@ -24,12 +24,12 @@
 <main class = layout>
     <section  class = "map_sec" id="map">
         <h2>Карта</h2>
-        <img src="assets/img/map_placeholder.jpg" alt="Карта міста з веломаршрутами">
+        <div id="routes-map"></div>
     </section>
 
     <section class = "routes_sec" id="routes">
         <h2>Маршрути</h2>
-        <div id="routes-root" class = cards>
+        <div id="routes-root">
             <article class = "route-card">
                 <h3>Маршрут №1</h3>
                 <p>
@@ -58,28 +58,7 @@
                 <a href="#route-info">Деталі маршруту</a>
             </article>
         </div>
-        <form class = "omni-card" id = "route-add-form">
-            <p>
-                <label for="name">Введіть ім'я</label>
-                <input type ="text" id ="name" name = "name" required minlength="3" maxlength="75">
-            </p>
-            <p>
-                <label for = "lengthKm">Довжина маршруту:</label>
-                <input type="number" id="lengthKm" name="lengthKm" required min="0.1" max = "300" step="any">
-            </p>
-            <label for="diff-select">Виберіть рівень складності</label>
-            <select id="diff-select" name="difficulty">
-                <option value = "null">Усі</option>
-                <option value = "easy-level">Легкий</option>
-                <option value = "medium-level">Середній</option>
-                <option value = "hard-level">Високий</option>
-            </select>
-            <div class = "form-buttons" id="form-buttons">
-                <button type="submit">Додати маршрут</button>
-                <button type = "button", id ="com-routes-button">Маршрути від користувачів</button>
-                <button type = "button", id ="com-routes-update">Оновити</button>
-            </div>
-        </form>
+
 
     </section>
 </main>

@@ -210,3 +210,21 @@ a:visited{
     margin: auto;
     gap: 16px;
 }
+.routes-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.routes-map {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #e9e4cf;
+    border: 2px solid #000;
+}
+
+@media (width >= 1280px) {
+    .routes-map {
+        height: calc(3 * 210px + 2 * 16px);
+    }
+}
